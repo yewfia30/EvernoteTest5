@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import <ENSDK/ENSDK.h>
 
 @interface AppDelegate ()
 
@@ -17,7 +18,25 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    // Initial development is done on the sandbox service
+    // When you want to connect to production, just pass "nil" for "optionalHost"
+    NSString *SANDBOX_HOST = ENSessionHostSandbox;
+    
+    // Fill in the consumer key and secret with the values that you received from Evernote
+    // To get an API key, visit http://dev.evernote.com/documentation/cloud/
+    NSString *CONSUMER_KEY = @"yewfia30-8691";
+    NSString *CONSUMER_SECRET = @"ba57cb5a02f6f95e";
+    
+    [ENSession setSharedSessionConsumerKey:CONSUMER_KEY
+                            consumerSecret:CONSUMER_SECRET
+                              optionalHost:SANDBOX_HOST];
     return YES;
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    BOOL didHandle = [[ENSession sharedSession] handleOpenURL:url];
+    // ...
+    return didHandle;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

@@ -7,9 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <ENSDK/ENSDK.h>
 
 @interface ViewController : UIViewController
 
+- (IBAction)loginButton:(id)sender;
+- (IBAction)getNotebookButton:(id)sender;
+@property (weak, nonatomic) IBOutlet UILabel *notebookLabel;
+- (IBAction)uploadNoteButton:(id)sender;
+@property (weak, nonatomic) IBOutlet UITextField *noteTitleTextField;
+
+@property ENNotebook * targetNotebook;
 
 @end
 
